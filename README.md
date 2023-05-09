@@ -1,5 +1,7 @@
 # Recipe API Project
 
+[![Checks](https://github.com/AngelCruzL/recipe-app-api/actions/workflows/checks.yml/badge.svg)](https://github.com/AngelCruzL/recipe-app-api/actions/workflows/checks.yml)
+
 This project is a simple API for recipes. It is a REST API that allows you to create, read, update and delete recipes.
 Made applying the TDD methodology.
 
