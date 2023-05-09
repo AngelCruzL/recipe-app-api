@@ -36,6 +36,11 @@ def create_recipe(user, **params):
     return Recipe.objects.create(user=user, **defaults)
 
 
+def create_user(**params):
+    """Create and return a sample user"""
+    return get_user_model().objects.create_user(**params)
+
+
 class PublicRecipeAPITests(TestCase):
     """Test unauthenticated API requests"""
 
@@ -54,9 +59,9 @@ class PrivateRecipeAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = get_user_model().objects.create_user(
-            'test@mail.com',
-            'testPass123'
+        self.user = create_user(
+            email='test@mail.com',
+            password='testPass123'
         )
         self.client.force_authenticate(self.user)
 
@@ -75,9 +80,9 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_recipe_list_limited_to_user(self):
         """Test list of recipes is limited to the authenticated user"""
-        other_user = get_user_model().objects.create_user(
-            'other@user.com',
-            'testPass123'
+        other_user = create_user(
+            email='other@user.com',
+            password='testPass123'
         )
         create_recipe(user=other_user)
         create_recipe(user=self.user)
