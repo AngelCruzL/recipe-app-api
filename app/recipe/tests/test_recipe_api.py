@@ -11,7 +11,7 @@ from rest_framework.test import APIClient
 
 from core.models import (
     Recipe,
-    Tag
+    Tag, Ingredient
 )
 from recipe.serializers import (
     RecipeSerializer,
@@ -329,7 +329,7 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_create_recipe_with_existing_user(self):
         """Test creating a new recipe with existing ingredients"""
-        ingredient_chocolate = Tag.objects.create(user=self.user, name='Chocolate')
+        ingredient_chocolate = Ingredient.objects.create(user=self.user, name='Chocolate')
         payload = {
             'title': 'Chocolate cheesecake',
             'time_in_minutes': 30,
